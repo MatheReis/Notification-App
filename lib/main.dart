@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +49,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: const MyHomePage(
         title: 'Notificação Demo',
@@ -65,8 +68,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
   @override
   void initState() {
     super.initState();
@@ -107,7 +108,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 content: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text('$notification.body')],
+                    children: [
+                      Text('$notification.body'),
+                    ],
                   ),
                 ),
               );
@@ -119,20 +122,17 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   // Envio de Notificação toda vez que o botão for pressionado
-  void _fetchAlbum() {
-    setState(() {
-      _counter++;
-    });
+  void _fetchData() {
     flutterLocalNotificationsPlugin.show(
       0,
-      "Nova Notificação",
-      "Saiba Mais",
+      'Notificação Teste',
+      'Saiba Mais!',
       NotificationDetails(
         android: AndroidNotificationDetails(
           channel.id,
           channel.name,
-          importance: Importance.high,
-          color: Colors.blueGrey,
+          color: Colors.blue,
+          importance: Importance.max,
           playSound: true,
           icon: '@mipmap/ic_launcher',
         ),
@@ -165,7 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               onPressed: () {
-                _fetchAlbum();
+                _fetchData();
                 print('A new onMessage event was published!');
               },
             ),
