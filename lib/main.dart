@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:notifications_app/second_screen.dart';
 
 // Classe que descreve um canal de notificação do Android
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
@@ -51,9 +52,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const MyHomePage(
-        title: 'Notificação Demo',
-      ),
+      home: const MyHomePage(title: 'First Screen',),
     );
   }
 }
@@ -68,6 +67,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late final String _secondScreen;
+
   @override
   void initState() {
     super.initState();
